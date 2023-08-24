@@ -21,3 +21,8 @@ dotnet user-secrets set "ConnectionStrings:GameStoreContext" "Server=localhost; 
 ```powershell
 dotnet user-secrets list
 ```
+
+## Add a Entity Framework into project
+```powershell
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```
