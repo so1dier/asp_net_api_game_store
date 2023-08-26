@@ -26,3 +26,9 @@ dotnet user-secrets list
 ```powershell
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
+
+
+## Update migrations
+```powershell
+dotnet ef database update
+```
