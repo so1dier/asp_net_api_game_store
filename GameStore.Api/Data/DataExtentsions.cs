@@ -6,11 +6,11 @@ namespace GameStore.Api.Data;
 //Update migrations every time the program runs
 public static class DataExtentsions
 {
-    public static void IntitalizeDb(this IServiceProvider serviceProvider)
+    public static async Task IntitalizeDbAsync(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
-        dbContext.Database.Migrate();
+        await dbContext.Database.MigrateAsync();
     }
 
     public static IServiceCollection AddRepositories(
@@ -20,8 +20,8 @@ public static class DataExtentsions
         var connString = configuration.GetConnectionString("GameStoreContext");
         services.AddSqlServer<GameStoreContext>(connString)
                 .AddScoped<IGamesRepository, EntityFrameworkGamesRepository>();
-                //Change from in memory to entity framework
-                //.AddSingleton<IGamesRepository, InMemGamesRepository>();
+        //Change from in memory to entity framework
+        //.AddSingleton<IGamesRepository, InMemGamesRepository>();
 
         return services;
     }
