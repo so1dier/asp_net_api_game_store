@@ -39,6 +39,8 @@ dotnet user-jwts create
 dotnet user-jwts print {token-id}
 
 dotnet user-jwts create --role "Admin"
+dotnet user-jwts create --scope "games:read"
+dotnet user-jwts create --role "Admin" --scop "games:read"
 ```
 
 ## JWT payload
