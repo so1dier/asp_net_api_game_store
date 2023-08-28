@@ -9,7 +9,6 @@ public static class GamesEndpoints
 {
     const string GetGameEndpointName = "GetGame";
 
-
     public static RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/games")
@@ -42,7 +41,10 @@ public static class GamesEndpoints
 
             return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
         })
-        .RequireAuthorization();
+        .RequireAuthorization(policy =>
+        {
+            policy.RequireRole("Admin");
+        });
 
         group.MapPut("/{id}", async (IGamesRepository repository, int id, UpdateGameDto updatedGameDto) =>
         {

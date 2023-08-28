@@ -37,6 +37,8 @@ dotnet ef database update
 ```powershell
 dotnet user-jwts create
 dotnet user-jwts print {token-id}
+
+dotnet user-jwts create --role "Admin"
 ```
 
 ## JWT payload
