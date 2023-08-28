@@ -32,3 +32,20 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```powershell
 dotnet ef database update
 ```
+
+## Generate access token for local development
+```powershell
+dotnet user-jwts create
+dotnet user-jwts print {token-id}
+```
+
+## JWT payload
+Field | Sample Values | Description
+iss | dotnet-user-jwts https://myautherserver.com | Issuer : Who created and signed the token
+aud | http://localhost:5124 https//gamestore | Audience: Who the token is intended for
+jti | 128b95ab | The unique identifier of the JWT
+sub | julio auth0 64141af968011b.. | Subject. THe principal that is the subject of the JWT. The Id of the signed in user
+scope | games: read, games:write, openid, profile | The type of access granted to the client
+nbf | 161150973311 | not valid before. THe time before which the JWT must not be accepted for porcessing.
+exp | 1615100911 | Exporation time after which the JWT must not be accepted for processing
+iat | 1617140901 | The time at which the JWT was issued
