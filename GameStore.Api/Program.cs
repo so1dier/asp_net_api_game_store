@@ -21,6 +21,8 @@ var app = builder.Build();
 
 await app.Services.IntitalizeDbAsync();
 
+app.UseHttpLogging();
+
 app.MapGamesEndpoints();
 
 app.Run();
