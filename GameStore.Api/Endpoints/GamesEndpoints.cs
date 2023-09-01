@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using GameStore.Api.Authorization;
 using GameStore.Api.Dtos;
 using GameStore.Api.Entities;
@@ -16,8 +17,22 @@ public static class GamesEndpoints
                         .WithParameterValidation();
 
         //group.MapGet("/", () => "Hello World!");
-        group.MapGet("/", async (IGamesRepository repository) =>
-            (await repository.GetAllAsync()).Select(game => game.AsDto()));
+        group.MapGet("/", async (IGamesRepository repository, ILoggerFactory loggerFactory) =>
+        {
+            try
+            {
+                (await repository.GetAllAsync()).Select(game => game.AsDto());
+            }
+            catch (System.Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger("Games Endpoints");
+                logger.LogError(ex, "Could not process a request on machine {Machine}. TraceId: {TraceId}",
+                    Environment.MachineName,
+                    Activity.Current?.TraceId);
+                
+                throw;
+            }
+        });
 
         group.MapGet("/{id}", async (IGamesRepository repository, int id) =>
         {
