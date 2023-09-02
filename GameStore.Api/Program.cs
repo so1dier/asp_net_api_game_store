@@ -1,6 +1,7 @@
 using GameStore.Api.Authorization;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
+using GameStore.Api.ErrorHandling;
 using GameStore.Api.Middlewawre;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Logging.AddJsonConsole(options =>
 
 var app = builder.Build();
 
+app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.ConfigureExceptionHandler());
 app.UseMiddleware<RequestTimingMiddleware>();
 
 await app.Services.IntitalizeDbAsync();
