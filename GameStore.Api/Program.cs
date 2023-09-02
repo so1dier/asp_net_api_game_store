@@ -1,9 +1,7 @@
-using System.Diagnostics;
 using GameStore.Api.Authorization;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
-using GameStore.Api.Repositories;
-using Microsoft.EntityFrameworkCore;
+using GameStore.Api.Middlewawre;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositories(builder.Configuration);
@@ -20,27 +18,7 @@ builder.Logging.AddJsonConsole(options =>
 
 var app = builder.Build();
 
-
-app.Use(async(context, next) =>
-{
-    var stopWatch = new Stopwatch();
-
-    try
-    {
-        stopWatch.Start();
-        await next(context);
-    }
-    finally
-    {
-        var elapsedMilliseconds = stopWatch.ElapsedMilliseconds;
-        app.Logger.LogInformation(
-            "{RequestMethod} {RequestPath} request took {ElapsedMiliseconds}ms to complete",
-            context.Request.Method,
-            context.Request.Path,
-            elapsedMilliseconds);
-    }
-
-});
+app.UseMiddleware<RequestTimingMiddleware>();
 
 await app.Services.IntitalizeDbAsync();
 
