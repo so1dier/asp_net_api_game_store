@@ -21,7 +21,7 @@ public static class GamesEndpoints
         {
             try
             {
-                (await repository.GetAllAsync()).Select(game => game.AsDto());
+                return Results.Ok((await repository.GetAllAsync()).Select(game => game.AsDto()));
             }
             catch (System.Exception ex)
             {
@@ -30,7 +30,13 @@ public static class GamesEndpoints
                     Environment.MachineName,
                     Activity.Current?.TraceId);
                 
-                throw;
+                return Results.Problem(
+                    title: "We made a mistake but we're workign on it!",
+                    statusCode: StatusCodes.Status500InternalServerError,
+                    extensions: new Dictionary<string, object?>
+                    {
+                        {"traceId", Activity.Current?.TraceId.ToString()}
+                    });
             }
         });
 
