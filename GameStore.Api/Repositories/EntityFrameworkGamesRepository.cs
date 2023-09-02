@@ -17,13 +17,11 @@ public class EntityFrameworkGamesRepository : IGamesRepository
 
     public async Task<IEnumerable<Game>> GetAllAsync()
     {
-        throw new InvalidOperationException("The db conn is closed!");
         return await dbContext.Games.AsNoTracking().ToListAsync();
     }
 
     public async Task<Game?> GetAsync(int id)
     {
-        throw new InvalidOperationException("The db conn is closed!");
         return await dbContext.Games.FindAsync(id);
     }
 
