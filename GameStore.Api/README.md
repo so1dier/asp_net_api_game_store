@@ -56,3 +56,9 @@ scope | games: read, games:write, openid, profile | The type of access granted t
 nbf | 161150973311 | not valid before. THe time before which the JWT must not be accepted for porcessing.
 exp | 1615100911 | Exporation time after which the JWT must not be accepted for processing
 iat | 1617140901 | The time at which the JWT was issued
+
+
+## Packages used in the project
+```powershell
+dotnet add package Asp.Versioning.Http
+```

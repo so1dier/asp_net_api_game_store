@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositories(builder.Configuration);
 builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.AddGameStoreAutorization();
+builder.Services.AddApiVersioning();
 
 builder.Logging.AddJsonConsole(options =>
 {
