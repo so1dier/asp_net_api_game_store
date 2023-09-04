@@ -62,3 +62,24 @@ iat | 1617140901 | The time at which the JWT was issued
 ```powershell
 dotnet add package Asp.Versioning.Http
 ```
+I. With this package it becomes easier to manage versions, for example:
+
+endpoint:
+http://localhost:5115/v1/games/
+
+        var group = routes.NewVersionedApi()
+                          .MapGroup("/v{version:newVersion}/games")
+                          .HasApiVersion(1.0)
+                          .HasApiVersion(2.0)
+                          .WithParameterValidation();
+
+In the above v1 and v2 specified in to group, so then it could be used as follows:
+        group.MapGet("/", async (IGamesRepository repository, ILoggerFactory loggerFactory) =>
+        {
+            return Results.Ok((await repository.GetAllAsync()).Select(game => game.AsDtoV1()));
+        })
+        .MapToApiVersion(1.0);
+
+
+II. Query versioning:
+http://localhost:5115/games?api-version=2.0
