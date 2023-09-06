@@ -1,4 +1,5 @@
 using GameStore.Api.Authorization;
+using GameStore.Api.Cors;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.ErrorHandling;
@@ -22,17 +23,7 @@ builder.Logging.AddJsonConsole(options =>
     };
 });
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(corsBuilder =>
-    {
-        var allowedOrigin = builder.Configuration["AllowedOrigin"]
-            ?? throw new InvalidOperationException("Allowed origin is not set");
-        corsBuilder.WithOrigins(allowedOrigin)
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-    });
-});
+builder.Services.AddGameStoreCors(builder.Configuration);
 
 var app = builder.Build();
 
