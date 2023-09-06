@@ -7,7 +7,11 @@ using GameStore.Api.Middlewawre;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositories(builder.Configuration);
-builder.Services.AddAuthentication().AddJwtBearer();
+
+builder.Services.AddAuthentication()
+                .AddJwtBearer()
+                .AddJwtBearer("Auth0");
+
 builder.Services.AddGameStoreAutorization();
 builder.Services.AddApiVersioning(options =>
 {
