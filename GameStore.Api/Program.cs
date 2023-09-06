@@ -42,7 +42,6 @@ app.UseMiddleware<RequestTimingMiddleware>();
 await app.Services.IntitalizeDbAsync();
 
 app.UseHttpLogging();
-
 app.MapGamesEndpoints();
 
 app.UseCors();
