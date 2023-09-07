@@ -26,6 +26,8 @@ public class RequestTimingMiddleware
         }
         finally
         {
+            stopWatch.Stop();
+
             var elapsedMilliseconds = stopWatch.ElapsedMilliseconds;
             logger.LogInformation(
                 "{RequestMethod} {RequestPath} request took {ElapsedMiliseconds}ms to complete",
