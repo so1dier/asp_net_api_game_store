@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace GameStore.Api.Authorization;
 
-public static class AuthorizationExtentions
+public static class AuthorizationExtensions
 {
     public static IServiceCollection AddGameStoreAutorization(this IServiceCollection services)
     {

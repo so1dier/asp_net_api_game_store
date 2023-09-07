@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GameStore.Api.Data;
 
 //Update migrations every time the program runs
-public static class DataExtentsions
+public static class DataExtensions
 {
     public static async Task IntitalizeDbAsync(this IServiceProvider serviceProvider)
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameStore.Api.ErrorHandling;
 
-public static class ErrorHandlingExtentions
+public static class ErrorHandlingExtensions
 {
     public static void ConfigureExceptionHandler(this IApplicationBuilder app)
     {
