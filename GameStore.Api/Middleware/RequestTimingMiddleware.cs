@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace GameStore.Api.Middlewawre;
+namespace GameStore.Api.Middleware;
 
 public class RequestTimingMiddleware
 {

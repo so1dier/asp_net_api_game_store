@@ -3,7 +3,7 @@ using GameStore.Api.Cors;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.ErrorHandling;
-using GameStore.Api.Middlewawre;
+using GameStore.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositories(builder.Configuration);
