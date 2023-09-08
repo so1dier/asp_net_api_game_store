@@ -21,9 +21,13 @@ public static class GamesEndpoints
 
         //group.MapGet("/", () => "Hello World!");
         //V1 GET endpoints
-        group.MapGet("/", async (IGamesRepository repository, ILoggerFactory loggerFactory) =>
+        group.MapGet("/", async (
+            IGamesRepository repository, 
+            ILoggerFactory loggerFactory,
+            [AsParameters]GetGamesDtoV1 request) =>
         {
-            return Results.Ok((await repository.GetAllAsync()).Select(game => game.AsDtoV1()));
+            return Results.Ok((await repository.GetAllAsync(request.PageNumber, request.PageSize))
+                                               .Select(game => game.AsDtoV1()));
         })
         .MapToApiVersion(1.0);
 
@@ -37,9 +41,13 @@ public static class GamesEndpoints
         .MapToApiVersion(1.0);
 
         //V2 GET endpoints
-        group.MapGet("/", async (IGamesRepository repository, ILoggerFactory loggerFactory) =>
+        group.MapGet("/", async (
+            IGamesRepository repository, 
+            ILoggerFactory loggerFactory,
+            [AsParameters]GetGamesDtoV2 request) =>
         {
-            return Results.Ok((await repository.GetAllAsync()).Select(game => game.AsDtoV2()));
+            return Results.Ok((await repository.GetAllAsync(request.PageNumber, request.PageSize))
+                                               .Select(game => game.AsDtoV2()));
         })
         .MapToApiVersion(2.0);
 
