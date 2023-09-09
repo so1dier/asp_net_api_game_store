@@ -83,3 +83,6 @@ In the above v1 and v2 specified in to group, so then it could be used as follow
 
 II. Query versioning:
 http://localhost:5115/games?api-version=2.0
+
+III. Query for pagination:
+http://localhost:5085/games?pageNumber=1&pageSize=3
