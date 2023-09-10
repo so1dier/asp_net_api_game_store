@@ -86,3 +86,6 @@ http://localhost:5115/games?api-version=2.0
 
 III. Query for pagination:
 http://localhost:5085/games?pageNumber=1&pageSize=3
+
+III. Query with filter and pagination:
+http://localhost:5085/games?pageNumber=1&pageSize=3&filter=Minecraft
