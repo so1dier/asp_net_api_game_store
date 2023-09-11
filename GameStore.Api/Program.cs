@@ -4,6 +4,9 @@ using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.ErrorHandling;
 using GameStore.Api.Middleware;
+using GameStore.Api.OpenApi;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRepositories(builder.Configuration);
@@ -17,7 +20,12 @@ builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new(1.0);
     options.AssumeDefaultVersionWhenUnspecified = true;
-});
+})
+.AddApiExplorer(options => options.GroupNameFormat = "'v'VVV");
+builder.Services.AddSwaggerGen()
+                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                .AddEndpointsApiExplorer();
+
 
 builder.Logging.AddJsonConsole(options =>
 {
@@ -38,7 +46,11 @@ await app.Services.IntitalizeDbAsync();
 
 app.UseHttpLogging();
 app.MapGamesEndpoints();
-
 app.UseCors();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+}
 
 app.Run();
