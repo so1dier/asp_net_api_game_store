@@ -2,6 +2,7 @@ using GameStore.Api.Authorization;
 using GameStore.Api.Dtos;
 using GameStore.Api.Entities;
 using GameStore.Api.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace GameStore.Api.Endpoints;
 
@@ -35,10 +36,10 @@ public static class GamesEndpoints
         })
         .MapToApiVersion(1.0);
 
-        group.MapGet("/{id}", async (IGamesRepository repository, int id) =>
+        group.MapGet("/{id}", async Task<Results<Ok<GameDtoV1>, NotFound>> (IGamesRepository repository, int id) =>
         {
             Game? game = await repository.GetAsync(id);
-            return game is null ? Results.NotFound() : Results.Ok(game.AsDtoV1());
+            return game is null ? TypedResults.NotFound() : TypedResults.Ok(game.AsDtoV1());
         })
         .WithName(GetGameV1EndpointName)
         .RequireAuthorization(Policies.ReadAccess)
