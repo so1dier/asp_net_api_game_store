@@ -20,7 +20,6 @@ public static class GamesEndpoints
                           .HasApiVersion(2.0)
                           .WithParameterValidation();
 
-        //group.MapGet("/", () => "Hello World!");
         //V1 GET endpoints
         group.MapGet("/", async (
             IGamesRepository repository,
