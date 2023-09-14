@@ -59,16 +59,16 @@ public static class GamesEndpoints
         })
         .MapToApiVersion(2.0);
 
-        group.MapGet("/{id}", async (IGamesRepository repository, int id) =>
+        group.MapGet("/{id}", async Task<Results<Ok<GameDtoV2>, NotFound>> (IGamesRepository repository, int id) =>
         {
             Game? game = await repository.GetAsync(id);
-            return game is null ? Results.NotFound() : Results.Ok(game.AsDtoV2());
+            return game is null ? TypedResults.NotFound() : TypedResults.Ok(game.AsDtoV2());
         })
         .WithName(GetGameV2EndpointName)
         .RequireAuthorization(Policies.ReadAccess)
         .MapToApiVersion(2.0);
 
-        group.MapPost("/", async (IGamesRepository repository, CreateGameDto gameDto) =>
+        group.MapPost("/", async Task<CreatedAtRoute<GameDtoV1>> (IGamesRepository repository, CreateGameDto gameDto) =>
         {
             Game game = new()
             {
@@ -81,18 +81,18 @@ public static class GamesEndpoints
 
             await repository.CreateAsync(game);
 
-            return Results.CreatedAtRoute(GetGameV1EndpointName, new { id = game.Id }, game);
+            return TypedResults.CreatedAtRoute(game.AsDtoV1(), GetGameV1EndpointName, new { id = game.Id });
         })
         .RequireAuthorization(Policies.WriteAccess)
         .MapToApiVersion(1.0);
 
-        group.MapPut("/{id}", async (IGamesRepository repository, int id, UpdateGameDto updatedGameDto) =>
+        group.MapPut("/{id}", async Task<Results<NotFound, NoContent>> (IGamesRepository repository, int id, UpdateGameDto updatedGameDto) =>
         {
             Game? exisingGame = await repository.GetAsync(id);
 
             if (exisingGame is null)
             {
-                return Results.NotFound();
+                return TypedResults.NotFound();
             }
 
             exisingGame.Name = updatedGameDto.Name;
@@ -103,7 +103,7 @@ public static class GamesEndpoints
 
             await repository.UpdateAsync(exisingGame);
 
-            return Results.NoContent();
+            return TypedResults.NoContent();
         })
         .RequireAuthorization(Policies.WriteAccess)
         .MapToApiVersion(1.0);
@@ -117,7 +117,7 @@ public static class GamesEndpoints
                 await repository.DeleteAsync(id);
             }
 
-            return Results.NoContent();
+            return TypedResults.NoContent();
         })
         .RequireAuthorization(Policies.WriteAccess)
         .MapToApiVersion(1.0);
