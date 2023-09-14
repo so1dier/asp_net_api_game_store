@@ -94,3 +94,4 @@ http://localhost:5085/games?pageNumber=1&pageSize=3&filter=Minecraft
 Documentation package
 dotnet add package Swashbuckle.AspNetCore
 dotnet add package Asp.Versioning.Mvc.ApiExplorer
+dotnet add package Microsoft.AspNetCore.OpenApi
