@@ -95,3 +95,5 @@ Documentation package
 dotnet add package Swashbuckle.AspNetCore
 dotnet add package Asp.Versioning.Mvc.ApiExplorer
 dotnet add package Microsoft.AspNetCore.OpenApi
+
+dotnet add package Azure.Storage.Blobs
