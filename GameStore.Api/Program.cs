@@ -41,13 +41,11 @@ var app = builder.Build();
 
 app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.ConfigureExceptionHandler());
 app.UseMiddleware<RequestTimingMiddleware>();
-
 await app.Services.IntitalizeDbAsync();
 
 app.UseHttpLogging();
 app.MapGamesEndpoints();
 app.UseCors();
-
 app.UseGameStoreSwagger();
 
 app.Run();
