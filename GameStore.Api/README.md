@@ -97,3 +97,10 @@ dotnet add package Asp.Versioning.Mvc.ApiExplorer
 dotnet add package Microsoft.AspNetCore.OpenApi
 
 dotnet add package Azure.Storage.Blobs
+
+
+## Setting the Azure Storage connection string to secret manager
+```powershell
+storage_connstring="[STORAGE CONN GOES HERE]"
+dotnet user-secrets set "ConnectionStrings:AzureStorage" $storage_connstring
+```

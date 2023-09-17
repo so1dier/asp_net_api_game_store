@@ -1,8 +1,10 @@
+using Azure.Storage.Blobs;
 using GameStore.Api.Authorization;
 using GameStore.Api.Cors;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.ErrorHandling;
+using GameStore.Api.ImageUpload;
 using GameStore.Api.Middleware;
 using GameStore.Api.OpenApi;
 using Microsoft.Extensions.Options;
@@ -36,6 +38,16 @@ builder.Logging.AddJsonConsole(options =>
 });
 
 builder.Services.AddGameStoreCors(builder.Configuration);
+
+
+builder.Services.AddSingleton<IImageUploader>(
+    new ImageUploader(
+        new BlobContainerClient(
+            builder.Configuration.GetConnectionString("AzureStorage"),
+            "images"
+        )
+    )
+);
 
 var app = builder.Build();
 
