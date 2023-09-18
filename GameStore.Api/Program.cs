@@ -57,6 +57,7 @@ await app.Services.IntitalizeDbAsync();
 
 app.UseHttpLogging();
 app.MapGamesEndpoints();
+app.MapImagesEndpoints();
 app.UseCors();
 app.UseGameStoreSwagger();
 
