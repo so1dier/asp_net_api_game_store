@@ -3,7 +3,7 @@ using Azure.Storage.Blobs.Models;
 
 namespace GameStore.Api.ImageUpload;
 
-public class ImageUploader : IImageUploader
+public class ImageUploader : IImageUploader 
 {
     private readonly BlobContainerClient containerClient;
 
@@ -24,6 +24,6 @@ public class ImageUploader : IImageUploader
             fileStream,
             new BlobHttpHeaders { ContentType = file.ContentType });
 
-        return blobClient.Uri.ToString();
+            return blobClient.Uri.ToString();
     }
 }
