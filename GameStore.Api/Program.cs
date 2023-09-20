@@ -49,6 +49,8 @@ builder.Services.AddSingleton<IImageUploader>(
     )
 );
 
+builder.Logging.AddAzureWebAppDiagnostics();
+
 var app = builder.Build();
 
 app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.ConfigureExceptionHandler());

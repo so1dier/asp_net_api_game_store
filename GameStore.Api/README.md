@@ -30,6 +30,11 @@ dotnet user-secrets list
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
+## Add package for logging on azure
+```powershell
+dotnet user-secrets list
+```
+
 
 ## Update migrations
 ```powershell
