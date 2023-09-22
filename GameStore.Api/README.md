@@ -2,7 +2,6 @@
 
 ## Starting SQL Server
 
-
 in the environment set the password by running:
 export sa_password="my_password_goes_here"
 
@@ -34,7 +33,6 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```powershell
 dotnet user-secrets list
 ```
-
 
 ## Update migrations
 ```powershell
@@ -101,7 +99,6 @@ Documentation package
 dotnet add package Swashbuckle.AspNetCore
 dotnet add package Asp.Versioning.Mvc.ApiExplorer
 dotnet add package Microsoft.AspNetCore.OpenApi
-
 dotnet add package Azure.Storage.Blobs
 
 
