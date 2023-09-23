@@ -107,3 +107,8 @@ dotnet add package Azure.Storage.Blobs
 storage_connstring="[STORAGE CONN GOES HERE]"
 dotnet user-secrets set "ConnectionStrings:AzureStorage" $storage_connstring
 ```
+
+
+Todo:
+* upload to azure
+* create shopping cart
