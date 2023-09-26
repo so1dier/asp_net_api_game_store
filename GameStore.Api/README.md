@@ -112,3 +112,6 @@ dotnet user-secrets set "ConnectionStrings:AzureStorage" $storage_connstring
 Todo:
 * upload to azure
 * create shopping cart
+
+issues:
+* starting .net server on azure. doesn't run. 
