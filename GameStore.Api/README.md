@@ -5,7 +5,7 @@
 in the environment set the password by running:
 export sa_password="my_password_goes_here"
 
-```powershell
+```bash
 sa_password="[SA PASSWORD HERE]"
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=$sa_password" -p 1433:1433 -v sqlvolume:/var/opt/mssql -d --rm --name mssql --platform linux/amd64 mcr.microsoft.com/mssql/server:2022-latest
 ```
@@ -14,33 +14,33 @@ copied:
 docker run --hostname=04fa0f79f143 --user=mssql --env=ACCEPT_EULA=Y --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=MSSQL_RPC_PORT=135 --env=CONFIG_EDGE_BUILD= --label='com.microsoft.product=Microsoft SQL Server' --label='com.microsoft.version=16.0.4065.3' --label='org.opencontainers.image.ref.name=ubuntu' --label='org.opencontainers.image.version=20.04' --label='vendor=Microsoft' --runtime=runc -d mcr.microsoft.com/mssql/server:2022-latest
 
 ## Setting the connection string to secret manager
-```powershell
+```bash
 $sa_password = "[SA PASSWORD HERE]"
 dotnet user-secrets set "ConnectionStrings:GameStoreContext" "Server=localhost; Database=GameStore; User Id=sa; Password=$sa_password; TrustServerCertificate=True"
 ```
 
 # To check if the password has been stored in dotnet user-secres, then:
-```powershell
+```bash
 dotnet user-secrets list
 ```
 
 ## Add a Entity Framework into project
-```powershell
+```bash
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## Add package for logging on azure
-```powershell
+```bash
 dotnet user-secrets list
 ```
 
 ## Update migrations
-```powershell
+```bash
 dotnet ef database update
 ```
 
 ## Generate access token for local development
-```powershell
+```bash
 dotnet user-jwts create
 dotnet user-jwts print {token-id}
 
@@ -63,7 +63,7 @@ dotnet user-jwts create --role "Admin" --scop "games:read"
 
 
 ## Packages used in the project
-```powershell
+```bash
 dotnet add package Asp.Versioning.Http
 ```
 I. With this package it becomes easier to manage versions, for example:
@@ -103,7 +103,7 @@ dotnet add package Azure.Storage.Blobs
 
 
 ## Setting the Azure Storage connection string to secret manager
-```powershell
+```bash
 storage_connstring="[STORAGE CONN GOES HERE]"
 dotnet user-secrets set "ConnectionStrings:AzureStorage" $storage_connstring
 ```
